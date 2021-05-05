@@ -25,7 +25,7 @@
 {% macro page(page) -%}
 <a href="{{ page.permalink | safe }}" class="catalogue-item">
   <div>
-    <span class="catalogue-pinned">Pinned &middot;</span>
+    <span class="catalogue-pinned">{{ config.extra.expressions.pinned | default(value="Pinned")}} &middot;</span>
     <time datetime="{{ page.date }}" class="catalogue-time">{{ page.date | date(format=config.extra.timeformat |
       default(value="%B %e, %Y")) }}</time>
     <h1 class="catalogue-title">{{ page.title }}</h1>
