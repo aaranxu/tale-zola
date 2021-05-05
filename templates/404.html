@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+
+
+
+{% block seo -%}
+  {{ super() }}
+
+  {%- set home = "404" -%}
+  {% set og_title = home -%}
+
+  {% if config.title -%}
+  	{% set title = home ~ " | " ~ config.title -%}
+  {% else -%}
+	{% set title = home -%}
+  {% endif -%}
+
+  {% set web_type = "WebPage" -%}
+  
+  {{ macros::seo(title=title, og_title=og_title, author=author, description=description, site_url=site_url, image=image, image_height=image_height, image_width=image_width, web_type=web_type) }}
+{%- endblock seo %}
+
+
+
+{% block content %}
+<div class="notfound">
+	<h1 class="notfound-error">{{ config.extra.expressions.p404 | default(value="404: Page not found") }}</h1>
+	<div class="notfound-line"></div>
+	<p class="notfound-message">
+		{{ config.extra.expressions.p404_info | default(value="Oops! We can't seem to find the page you are looking for.") | safe }} {{ config.extra.expressions.p404_back_home_start | default(value="Let's") |
+		safe }}
+		<a href="{{ config.base_url | safe }}">{{ config.extra.expressions.p404_back_home_with_link | default(value="head back home") |
+		safe }}</a>{{ config.extra.expressions.p404_back_home_end | default(value=".") |
+		safe }}
+	</p>
+	<p></p>
+</div>
+{% endblock content %}

@@ -1,0 +1,70 @@
+{% extends "base.html"%}
+
+
+
+{% block seo -%}
+  {{ super() }}
+
+  {%- set og_title = page.title -%}
+
+  {% if config.title and page.title -%}
+  	{% set title = page.title ~ " | " ~ config.title -%}
+  {% elif page.title -%}
+	{% set title = page.title -%}
+  {% elif config.title -%}
+    {% set title = config.title -%}
+  {% else -%}
+    {% set title = "" -%}
+  {% endif -%}
+
+  {% if page.extra.author -%}
+	{% set author = page.extra.author -%}
+  {% endif -%}
+
+  {% if page.description -%}
+	{% set description = page.description -%}
+  {% endif -%}
+
+  {% if page.extra.image -%}
+	{% set image = page.extra.image -%}
+  {% endif -%}
+
+  {% if page.extra.image_height -%}
+	{% set image_height = page.extra.image_height -%}
+  {% endif -%}
+
+  {% if page.extra.image_width -%}
+	{% set image_width = page.extra.image_width -%}
+  {% endif -%}
+
+  {% set web_type = "BlogPosting" -%}
+  
+  {{ macros::seo(title=title, og_title=og_title, author=author, description=description, site_url=site_url, image=image, image_height=image_height, image_width=image_width, web_type=web_type) }}
+{%- endblock seo %}
+
+
+
+{% block content %}
+  <div class="post">
+  	<div class="post-info">
+  		{% if page.extra.author -%}
+  			<span>{{ config.extra.expressions.written_by | default(value="Written by") }}</span> {{ page.extra.author }}<br>
+  		{% elif config.extra.author -%}
+  			<span>{{ config.extra.expressions.written_by | default(value="Written by") }}</span> config.extra.author<br>
+  		{%- endif %}
+  		<span>{{ config.extra.expressions.on | default(value="on")}}&nbsp;</span><time datetime="{{ page.date }}">{{ page.date | date(format=config.extra.timeformat | default(value="%B %e, %Y"))}}</time>
+  	</div>
+  	<h1 class="post-title">{{ page.title }}</h1>
+  	<div class="post-line"></div>
+  	{{ page.content | safe }}
+  </div>
+  <div class="pagination">
+  	{% if page.later -%}
+  		<a href="{{ page.later.permalink | safe }}" class="left arrow">&#8592;</a>
+  	{%- endif %}
+		<a href="#" class="top">Top</a>
+		{% if page.earlier -%}
+			<a href="{{ page.earlier.permalink | safe }}" class="right arrow">&#8594;</a>
+		{%- endif %}
+  </div>
+{% endblock content %}

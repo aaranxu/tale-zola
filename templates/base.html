@@ -1,0 +1,79 @@
+{% import 'macros.html' as macros %}
+<!DOCTYPE html>
+<html lang="{{ config.extra.language_code | default(value="en") }}">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  {% block seo %}
+    {%- set site_url = current_url | default(value=get_url(path="404.html")) -%}
+    {% set author = config.extra.author | default(value="") -%}
+    {% set description = config.description | default(value="") -%}
+    {% set image = config.extra.seo.image | default(value="") -%}
+    {% set image_height = config.extra.seo.image_height | default(value=0) -%}
+    {% set image_width = config.extra.seo.image_width | default(value=0) -%}
+  {% endblock seo %}
+
+  <link rel="stylesheet" href="{{ get_url(path="main.css") | safe }}">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Libre+Baskerville:400,400i,700">
+
+  <link rel="icon" type="image/png" sizes="32x32" href="{{ get_url(path="assets/favicon-32x32.png") | safe }}">
+  <link rel="icon" type="image/png" sizes="16x16" href="{{ get_url(path="assets/favicon-16x16.png") | safe }}">
+  <link rel="apple-touch-icon" sizes="180x180" href="{{ get_url(path="assets/apple-touch-icon.png") | safe }}">
+
+  {% if config.generate_feed %}
+    <link type="application/atom+xml" rel="alternate" href="{{ get_url(path=config.feed_filename | default(value="atom.xml")) | safe }}" title="{{ config.title | default(value="Tale-Zola") }}" />
+  {% endif %}
+
+  {% if config.extra.google_analytics %}
+    <script async src='https://www.google-analytics.com/analytics.js'></script>
+    <script>
+      window.ga = window.ga || function () { (ga.q = ga.q || []).push(arguments) }; ga.l = +new Date;
+      ga('create', '{{ config.extra.google_analytics }}', 'auto');
+      ga('send', 'pageview');
+    </script>
+  {% endif %}
+
+  {{ macros::katex() }}
+</head>
+
+<body>
+  {% block header %}
+  <nav class="nav">
+    <div class="nav-container">
+      <a href="{{ config.base_url | safe }}">
+        <h2 class="nav-title">{{ config.title | default(value="Tale-Zola")}}</h2>
+      </a>
+      <ul>
+        {% if config.extra.menu %}
+          {% for menu in config.extra.menu %}
+            <li><a href="{{ get_url(path=menu.url) | safe }}">{{ menu.name }}</a></li>
+          {% endfor %}
+        {% else %}
+          <li><a href="{{ config.base_url | safe }}">Posts</a></li>
+          <li><a href="{{ get_url(path=" tags") | safe }}">Tags</a></li>
+          <li><a href="{{ get_url(path=" about") | safe }}">About</a></li>
+        {% endif %}
+      </ul>
+    </div>
+  </nav>
+  {% endblock header %}
+
+  <main>
+    {% block content %}{% endblock content %}
+  </main>
+
+  {% block footer %}
+  <footer>
+    <span>
+      {%- if config.extra.footer -%}
+      &copy; {{ macros::time() }} {{ config.extra.author | default(value="Aaran Xu")}}. {{ config.extra.footer.info | default(value="Made with Zola with Tala-Zola theme.") | safe }}
+      {%- else -%}
+        &copy; 2021 Aaran Xu. Made with <a href="https://www.getzola.org">Zola</a> using the <a
+          href="https://github.com/aaranxu/tale-zola">Tale-Zola</a> theme.
+      {%- endif -%}
+    </span>
+  </footer>
+  {% endblock footer %}
+</body>
+</html>

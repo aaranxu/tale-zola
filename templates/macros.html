@@ -1,0 +1,205 @@
+{%- macro time() -%}
+  {%- if config.extra.footer.start_year -%}
+  	{%- set start_year = config.extra.footer.start_year -%}
+  {%- else -%}
+  	{%- set start_year = now() | date(format="%Y") -%}
+  {%- endif -%}
+  
+  {%- if config.extra.footer.end_year -%}
+  	{%- set end_year = config.extra.footer.end_year -%}
+  {%- else -%}
+  	{%- set end_year = now() | date(format="%Y") -%}
+  {%- endif -%}
+  
+  {%- if start_year == end_year -%}
+  	{%- set year = start_year -%}
+  {%- else -%}
+  	{%- set year = start_year ~ "-" ~ end_year -%}
+  {%- endif -%}
+
+  <time datetime="{{ now() }}">{{ year }}</time>
+{%- endmacro -%}
+
+
+
+{% macro page(page) -%}
+<a href="{{ page.permalink | safe }}" class="catalogue-item">
+  <div>
+    <span class="catalogue-pinned">Pinned &middot;</span>
+    <time datetime="{{ page.date }}" class="catalogue-time">{{ page.date | date(format=config.extra.timeformat |
+      default(value="%B %e, %Y")) }}</time>
+    <h1 class="catalogue-title">{{ page.title }}</h1>
+    <div class="catalogue-line"></div>
+    <p>
+      {%- if page.summary -%}
+      {{ page.summary | safe }}
+      {% else -%}
+      {{ page.content | striptags | truncate(length=280) | safe }}
+      {%- endif -%}
+    </p>
+  </div>
+</a>
+{%- endmacro %}
+
+
+
+{% macro katex() %}
+{% if page.extra.katex or section.extra.katex or config.extra.katex %}
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.css"
+  integrity="sha384-zB1R0rpPzHqg7Kpt0Aljp8JPLqbXI3bhnPWROx27a9N0Ll6ZP/+DiW/UqRcLbRjq" crossorigin="anonymous">
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.js"
+  integrity="sha384-y23I5Q6l+B6vatafAwxRu/0oK/79VlbSz7Q9aiSZUvyWYIYsd+qj+o24G5ZU2zJz" crossorigin="anonymous"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/contrib/auto-render.min.js"
+  integrity="sha384-kWPLUVMOks5AQFrykwIup5lo0m3iMkkHrD0uJ4H5cjeGihAutqP0yW0J6dpFiVkI" crossorigin="anonymous"
+  onload="renderMathInElement(document.body);"></script>
+{% endif %}
+{% endmacro %}
+
+
+
+{% macro seo(
+  title="",
+  og_title="",
+  author="",
+  description="",
+  site_url="",
+  image="",
+  image_height="",
+  image_width="",
+  web_type="WebSite"
+  ) -%}
+{% if title %}
+<title>{{ title }}</title>
+{% endif %}
+
+{% if og_title %}
+<meta property="og:title" content="{{ og_title }}">
+{% endif %}
+
+{% if author %}
+<meta name="author" content="{{ author }}">
+{% endif %}
+
+<meta property="og:locale" content="{{ config.extra.seo.og_locale | default(value="en-US") }}">
+
+{% if description %}
+<meta name="description" content="{{ description }}">
+<meta property="og:description" content="{{ description }}">
+{% endif %}
+
+{% if site_url %}
+<link rel="canonical" href="{{ site_url | safe }}">
+<meta property="og:url" content="{{ site_url | safe }}">
+{% endif %}
+
+{% if config.title %}
+<meta property="og:site_name" content="{{ config.title }}" />
+{% endif %}
+
+{% if image %}
+  <meta property="og:image" content="{{ get_url(path=image) | safe }}">
+  {% if image_height -%}
+    <meta property="og:image:height" content="{{ image_height }}">
+  {%- endif %}
+  {% if image_width -%}
+    <meta property="og:image:width" content="{{ image_width }}">
+  {%- endif %}
+{% endif %}
+
+{% if page.date %}
+  <meta property="og:type" content="article" />
+  <meta property="article:published_time" content="{{ page.date | date(format="%+") }}">
+{% endif %}
+
+{% if page.earlier %}
+  <link rel="prev" href="{{ page.earlier.permalink | safe }}">
+{% elif paginator.previous %}
+  <link rel="prev" href="{{ paginator.previous | safe }}">
+{% endif %}
+
+{% if ppage.later %}
+  <link rel="next" href="{{ page.later.permalink | safe }}">
+{% elif paginator.next %}
+  <link rel="next" href="{{ paginator.next | safe }}">
+{% endif %}
+
+{% if image %}
+  <meta name="twitter:card" content="summary_large_image"">
+  <meta property="twitter:image" content="{{ get_url(path=image) | safe }}">
+{% else %}
+  <meta name="twitter:card" content="summary">
+{% endif %}
+
+{% if og_title %}
+  <meta property="twitter:title" content="{{ og_title }}">
+{% endif %}
+
+{% if config.extra.seo.twitter.site %}
+  <meta name="twitter:site" content="@{{ config.extra.seo.twitter.site }}">
+  {% if config.extra.seo.twitter_creator %}
+    <meta name="twitter:creator" content="@{{  config.extra.seo.twitter.creator }}">
+  {% endif %}
+{% endif %}
+
+{% if config.extra.seo.facebook %}
+  {% if config.extra.seo.facebook.admins %}
+    <meta property="fb:admins" content="{{ config.extra.seo.facebook.admins }}" />
+  {% endif %}
+
+  {% if config.extra.seo.facebook.publisher %}
+    <meta property="article:publisher" content="{{ config.extra.seo.facebook.publisher }}" />
+  {% endif %}
+
+  {% if config.extra.seo.facebook.app_id %}
+    <meta property="fb:app_id" content="{{ config.extra.seo.facebook.app_id }}" />
+  {% endif %}
+{% endif %}
+
+{% if config.extra.seo.webmaster %}
+  {% if config.extra.seo.webmaster.google %}
+    <meta name="google-site-verification" content="{{ config.extra.seo.webmaster.google }}" />
+  {% endif %}
+
+  {% if config.extra.seo.webmaster.bing %}
+    <meta name="msvalidate.01" content="{{ config.extra.seo.webmaster.bing }}" />
+  {% endif %}
+
+  {% if config.extra.seo.webmaster.alexa %}
+    <meta name="alexaVerifyID" content="{{ config.extra.seo.webmaster.alexa }}" />
+  {% endif %}
+
+  {% if config.extra.seo.webmaster.yandex %}
+    <meta name="yandex-verification" content="{{ config.extra.seo.webmaster.yandex }}" />
+  {% endif %}
+
+  {% if config.extra.seo.webmaster.baidu %}
+    <meta name="baidu-site-verification" content="{{ config.extra.seo.webmaster.baidu }}" />
+  {% endif %}
+{% endif %}
+
+<script type="application/ld+json">
+{
+  "author": {
+    "@type":"Person",
+	  "name":"{{ author }}",
+  },
+  "description": "{{description }}",
+  "url": "{{ site_url | safe }}",
+  "@context":"https://schema.org",
+  "@type": "{{ web_type }}",
+  "headline": "{{ og_title }}"
+  {% if page %}
+    {% if page.updated %}
+      "dateModified":"{{ page.updated | date(format="%+") }}",
+    {% endif %}
+    {% if page.date %}
+      "datePublished":"{{ page.date | date(format="%+") }}",
+    {% endif %}
+    "mainEntityOfPage":{
+      "@type":"WebPage",
+      "@id":"{{ site_url | safe }}"
+    },
+  {% endif %}
+}
+</script>
+{%- endmacro %}
