@@ -1,0 +1,17 @@
+name = "tale-zola"
+description = "Tala-Zola is a minimal Zola theme helping you to build a nice and seo-ready blog."
+license = "MIT"
+homepage = "https://github.com/aaranxu/tale-zola"
+min_version = "0.13.0"
+demo = "https://tale-zola.netlify.app/"
+
+[extra]
+
+[author]
+name = "Aaran Xu"
+homepage = "https://github.com/aaranxu"
+
+[original]
+author =  "Chester How"
+homepage = "https://chesterhow.github.io/tale/"
+repo = "https://github.com/chesterhow/tale"
