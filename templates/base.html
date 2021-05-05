@@ -51,8 +51,8 @@
           {% endfor %}
         {% else %}
           <li><a href="{{ config.base_url | safe }}">Posts</a></li>
-          <li><a href="{{ get_url(path=" tags") | safe }}">Tags</a></li>
-          <li><a href="{{ get_url(path=" about") | safe }}">About</a></li>
+          <li><a href="{{ get_url(path="tags") | safe }}">Tags</a></li>
+          <li><a href="{{ get_url(path="about") | safe }}">About</a></li>
         {% endif %}
       </ul>
     </div>
