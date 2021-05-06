@@ -59,7 +59,7 @@
   	{{ page.content | safe }}
   </div>
 
-	{{ macros::disqus() }}
+	{% include "partials/disqus.html" %}
 
   <div class="pagination">
   	{% if page.later -%}

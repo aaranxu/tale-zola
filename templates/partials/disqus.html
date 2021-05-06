@@ -1,0 +1,13 @@
+{% if page.extra.disqus or config.extra.disqus -%}
+	<script src="{{ get_url(path=" assets/js/disqusLoader.js") | safe }}"></script>
+	<div id="disqus_thread">
+		<h3>{{ config.extra.expressions.disqus_discussion | default(value="Discussion and feedback") }}</h3>
+	</div>
+	<div class="disqus"></div>
+	<script>
+		disqusLoader('.disqus', {
+			scriptUrl: 'https://{{ config.extra.disqus_id | default(value="") }}.disqus.com/embed.js'
+		});
+	</script>
+	<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+{%- endif %}

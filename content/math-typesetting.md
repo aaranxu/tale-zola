@@ -18,14 +18,13 @@ Mathematical notation in a project can be enabled by using third party JavaScrip
 
 In this example we will be using [KaTeX](https://katex.org/)
 
-- Create a macro under `/template/macros.html` with a macro named `katex`.
-- Within this macro reference the [Auto-render Extension](https://katex.org/docs/autorender.html) or host these scripts locally.
-- Import the macro in your templates like so:  
+- Create a template under `/template/katex.html`.
+- Within this template use the reference of [Auto-render Extension](https://katex.org/docs/autorender.html) or host these scripts locally.
+- Inlcude the template in your page templates like so: 
 
 ```bash
-{% import 'macros.html' as macros %}
 {% if page.extra.katex or section.extra.katex or config.extra.katex %}
-{{ macros::katex() }}
+  {% include 'katex.html' %}
 {% endif %}
 ```
 

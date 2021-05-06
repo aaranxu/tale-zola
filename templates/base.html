@@ -34,7 +34,8 @@
     </script>
   {% endif %}
 
-  {{ macros::katex() }}
+  {#{ macros::katex() }#}
+  {% include "partials/katex.html" %}
 </head>
 
 <body>
