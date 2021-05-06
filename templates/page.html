@@ -10,7 +10,7 @@
   {% if config.title and page.title -%}
   	{% set title = page.title ~ " | " ~ config.title -%}
   {% elif page.title -%}
-	{% set title = page.title -%}
+		{% set title = page.title -%}
   {% elif config.title -%}
     {% set title = config.title -%}
   {% else -%}
@@ -18,23 +18,23 @@
   {% endif -%}
 
   {% if page.extra.author -%}
-	{% set author = page.extra.author -%}
+		{% set author = page.extra.author -%}
   {% endif -%}
 
   {% if page.description -%}
-	{% set description = page.description -%}
+		{% set description = page.description -%}
   {% endif -%}
 
   {% if page.extra.image -%}
-	{% set image = page.extra.image -%}
+		{% set image = page.extra.image -%}
   {% endif -%}
 
   {% if page.extra.image_height -%}
-	{% set image_height = page.extra.image_height -%}
+		{% set image_height = page.extra.image_height -%}
   {% endif -%}
 
   {% if page.extra.image_width -%}
-	{% set image_width = page.extra.image_width -%}
+		{% set image_width = page.extra.image_width -%}
   {% endif -%}
 
   {% set web_type = "BlogPosting" -%}
@@ -58,6 +58,9 @@
   	<div class="post-line"></div>
   	{{ page.content | safe }}
   </div>
+
+	{{ macros::disqus() }}
+
   <div class="pagination">
   	{% if page.later -%}
   		<a href="{{ page.later.permalink | safe }}" class="left arrow">&#8592;</a>

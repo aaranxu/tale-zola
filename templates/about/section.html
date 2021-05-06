@@ -10,7 +10,7 @@
   {% if config.title and section.title -%}
   	{% set title = section.title ~ " | " ~ config.title -%}
   {% elif section.title -%}
-	{% set title = section.title -%}
+		{% set title = section.title -%}
   {% elif config.title -%}
     {% set title = config.title -%}
   {% else -%}
@@ -18,7 +18,7 @@
   {% endif -%}
 
   {% if section.description -%}
-	{% set description = section.description -%}
+		{% set description = section.description -%}
   {% endif -%}
 
   {% set web_type = "WebPage" -%}

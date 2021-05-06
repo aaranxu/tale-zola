@@ -39,16 +39,20 @@ author = "Aaran Xu"
 github = "https://github.com/aaranxu"
 email  = "aaranxu@outlook.com"
 
-# Google Analytics
-# If using this, add a value like "UA—XXXXXXXX-X"
-google_analytics = ""
-
 # Set date format in the site
 timeformat = "%B %e, %Y" # e.g. June 14, 2021
 
 # Whether to support KaTeX globally
 katex = false
 
+# Google Analytics
+# If using this, add a value like "UA—XXXXXXXX-X"
+google_analytics = ""
+
+# Whether to use Disqus globally and set to your disqus id
+# or you can enable the disqus on per post page with `extra.disqus` option
+disqus = false
+disqus_id = ""
 
 ## Open Graph + Twitter Cards
 [extra.seo]
@@ -104,6 +108,9 @@ written_by = "Written by"  # Like: Written by Aaran Xu
 on = "on"                  # Like: on May 3, 2021
 top = "Top"                # Go to the top of the page in the post
 tags = "Tags"              # In the page of Tags
+
+# disqus comments block
+disqus_discussion = "Discussion and feedback"
 
 # The contents of the 404 page
 p404 = "404: Page not found"
