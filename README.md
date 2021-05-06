@@ -177,6 +177,15 @@ Use Google Analytics. Add your own Google Analytics ID.
 google_analytics = "UA—XXXXXXXX-X"
 ```
 
+Whether to use Disqus globally and set to your disqus id name.
+And you can enable the disqus on per post page with `extra.disqus` option
+
+```toml
+[extra]
+disqus = false
+disqus_id = ""
+```
+
 Code syntax highlighting. See also [syntax hightlighting](https://www.getzola.org/documentation/getting-started/configuration/#syntax-highlighting).
 
 ```toml
@@ -230,6 +239,9 @@ written_by = "Written by"  # Like: Written by Aaran Xu
 on = "on"                  # Like: on May 3, 2021
 top = "Top"                # Go to the top of the page in the post
 tags = "Tags"              # In the page of Tags
+
+# disqus comments block
+disqus_discussion = "Discussion and feedback"
 
 # The contents of the 404 page
 p404 = "404: Page not found"
