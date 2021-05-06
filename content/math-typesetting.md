@@ -23,7 +23,7 @@ In this example we will be using [KaTeX](https://katex.org/)
 
 ```bash
 {% import 'macros.html' as macros %}
-{% if page.extra.math or section.extra.math or config.extra.math %}
+{% if page.extra.katex or section.extra.katex or config.extra.katex %}
 {{ macros::katex() }}
 {% endif %}
 ```
