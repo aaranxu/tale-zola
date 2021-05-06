@@ -192,7 +192,7 @@ Use KaTeX to support the math notation
 katex = true
 ```
 
-> Note: You can also add the `katex` option on each per mardown file of the page or section.
+> Note: You can also add the `katex` option on per mardown file of the page or section.
 
 Set date format in the site
 
