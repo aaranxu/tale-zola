@@ -8,6 +8,8 @@ draft = false
 [taxonomies]
 tags = ["Sample"]
 
+[extra]
+author = "Public"
 +++
 
 Lorem est tota propiore conpellat pectoribus de pectora summo. <!--more-->Redit
