@@ -11,11 +11,11 @@ $shadow-color: rgba(0, 0, 0, .2) !default;
 $code-color: #bf616a !default;
 
 // Fonts
-$serif-primary: 'Libre Baskerville', 'Times New Roman', Times, serif !default;
+$serif-primary: 'Libre Baskerville', 'Times New Roman', Times, "Source Serif Pro", "Helvetica Neue", Helvetica, Arial, "Hiragino Sans GB", "Hiragino Sans GB W3", "Microsoft YaHei UI", "Microsoft YaHei", '微软雅黑', '思源黑体', SYHT, "WenQuanYi Micro Hei", serif !default;
 $serif-secondary: Palatino, 'Palatino LT STD', 'Palatino Linotype', 'Book Antiqua', 'Georgia', serif !default;
 $sans-serif: 'Helvetica Neue', 'Segoe UI', Helvetica, Arial, sans-serif !default;
 $monospaced: Menlo, Monaco, monospace !default;
-$code-font: 400 1.125rem/1.75 SFMono-Regular,Consolas,Liberation Mono,Menlo,monospace;
+$code-font: 400 1.125rem/1.75 SFMono-Regular, Consolas, Liberation Mono,Menlo, monospace;
 
 @mixin box-sizing($type: border-box) {
   -webkit-box-sizing: $type;
