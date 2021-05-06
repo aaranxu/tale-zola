@@ -13,6 +13,7 @@ code {
 
 pre {
   margin: 0 0 1rem;
+  overflow: auto;
 }
 
 pre code {
@@ -20,6 +21,7 @@ pre code {
   color: inherit;
   font-size: 100%;
   padding: 0;
+  font: $code-font;
 }
 
 .highlight {
