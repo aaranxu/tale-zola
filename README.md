@@ -225,6 +225,7 @@ Change the words in your speaking language.
 ```toml
 [extra.expressions]
 home = "Home"              # The homepage's name
+pinned = "Pinned"          # On the header of the post list
 written_by = "Written by"  # Like: Written by Aaran Xu
 on = "on"                  # Like: on May 3, 2021
 top = "Top"                # Go to the top of the page in the post
