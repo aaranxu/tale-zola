@@ -32,9 +32,9 @@
     <div class="catalogue-line"></div>
     <p>
       {%- if page.summary -%}
-      {{ page.summary | safe }}
+      {{ page.summary | markdown |safe }}
       {% else -%}
-      {{ page.content | striptags | truncate(length=280) | safe }}
+      {{ page.content | striptags | truncate(length=280) | markdown |safe }}
       {%- endif -%}
     </p>
   </div>
